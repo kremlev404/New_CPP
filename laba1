@@ -1,0 +1,59 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+// Подключаем нужные библиотеки
+
+using std::cout;
+using std::string;
+using std::endl;
+using std::ifstream;
+
+void logo(){
+// Наводим красоту
+	cout << "\033[37;1m\033[44m"<< "\n **********************************************************";
+	cout << "\033[37;1m\033[47m"<< "\n * Nizhniy Novgorod Technical University                  *";
+	cout << "\033[37;1m\033[47m"<< "\n * Study work number 1. Task number 12.                   *";
+	cout << "\033[37;1m\033[47m"<< "\n * Performed student 18-IVT-2 Kremlev Anton               *";
+	cout << "\033[37;1m\033[44m"<< "\n **********************************************************";
+	cout << "\x1b[39;49m" << endl << endl;;
+}
+				
+
+int main(int argc, char** argv){
+	system("clear");
+	logo();
+// Проверяем на верное кол-во аргументов 
+  	if (argc < 4){
+        cout << "Please Use : ./SoftName fil	e [...] WordToFind WordToReplace" << endl;
+        return 0;
+    }
+// Имя файла это первый агрумент
+	ifstream fN(argv[1]);
+    string f_w_string = argv[2];
+// Слово, которое мы хотим заменить это 2 аргумент
+    string s_w_string = argv[3];
+// Слово, на которое мы хотим заменить это 3 аргумент
+    string my_string;
+ 	size_t length = s_w_string.length();
+	    if (fN.is_open()) {
+// ПРоверям, открылся ли файл 
+	       while (getline(fN, my_string))
+		    {
+		        while (12)
+		        {
+		            size_t pos = my_string.find(f_w_string);
+// Ищем позицию слова
+		            if (pos != string::npos)
+		                my_string.replace(pos, length, s_w_string);
+// Заменяем
+		            else 
+		                break;
+		        }
+		        cout << my_string << endl;
+		    }
+	    }
+		else
+        	cout << argv[1] << ": No such file or directory" << endl;
+// В ином случае заменяем выводим ошибку
+    return 0;
+}
