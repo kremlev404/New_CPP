@@ -15,7 +15,7 @@ struct Car
 	u_int price;
 };
  
-void SetCars(u_int N, char* filename)
+void SetCars(char* filename, u_int N)
 {
 	FILE* fout;
 	fout = fopen(filename, "w");
@@ -37,7 +37,7 @@ void SetCars(u_int N, char* filename)
 	}
 }
 
-void ShowCars(u_int N, char* filename)
+void ShowCars(char* filename, u_int N)
 {
 	FILE* fin;
 	fin = fopen(filename, "r");
@@ -45,9 +45,8 @@ void ShowCars(u_int N, char* filename)
 		cout << filename << ": can't be opened\n";
 		exit(-1);
 	}
-	int k=0;
+	u_int k=0;
 	Car tmpC;
-	cout <<"Car Model\t"<<"Production Year\t"<<"Mileage\t"<<"Manufacturer\t"<<"Price\t\n";
 	fprintf(fin, "Car Model\tProduction Year\tMileage\tManufacturer\tPrice\t\n");
  	while(fscanf(fin,"%s\t%s\t%u\t%u\t%u\n", tmpC.carmodel, tmpC.productionyear, &tmpC.mileage, &tmpC.manufacturer, &tmpC.price) != EOF)
 		if(!(N==k)){
@@ -70,10 +69,10 @@ int main(int argc, char** argv)
 	u_int N = atoi(argv[2]);
 	
 	if ((!strcmp(argv[1],"-с")))
-		SetCars(N,argv[3]);
+		SetCars(argv[3], N);
 
 	if ((!strcmp(argv[1],"-r")))
-		ShowCars(N,argv[3]);
+		ShowCars(argv[3], N);
 
 	return 0;
 }
