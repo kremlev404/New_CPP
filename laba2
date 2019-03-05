@@ -78,7 +78,7 @@ int main(int argc, char** argv)
 {
 	//Выводим лого
 	logo();
-	//Проверяем нужна ли пользователю наша помощь
+		//Проверяем нужна ли пользователю наша помощь
 	if ((!strcmp(argv[1],"--help")) || (!strcmp(argv[1],"-h"))){
 		cout<< "You can choose 2 startup options: "<<endl;
 		cout<< "-с launch of the program in the mode of creating electronic tables"<<endl;
@@ -86,6 +86,11 @@ int main(int argc, char** argv)
 		cout<< "Also you must specify the number [N] of entries and the [file_name]"<<endl;
 		cout<< "Final view of the program launch structure -с [N] [file_name] or -r [N] [file_name]"<<endl;
 		return 0;
+	}
+	// Проверяем на верное кол-во аргументов 
+  	if (argc != 4){
+        cout << "Please get support by use --help or -h" << endl;
+        return 0;
 	}
 	//создаем переменную, которая хранит кол-во записей
 	u_int N = atoi(argv[2]);
