@@ -24,17 +24,14 @@ void SetCars(char* filename, u_int N)
 		exit(-1);
 	}
 	Car tmpC;
-	cout <<"Car Model\t"<<"Production Year\t"<<"Mileage\t"<<"Manufacturer\t"<<"Price\t\n";
-	fprintf(fout, "Car Model\tProduction Year\tMileage\tManufacturer\tPrice\t\n");
-	for (int i = 0; i<N; i++)
+	cout <<"Car Model\tProduction Year\tMileage\tManufacturer\tPrice\t\n";
+	
+	for (int i = 1; i<=N; i++)
 	{
-		cin>>tmpC.carmodel;
-		cin>>tmpC.productionyear;
-		cin>>tmpC.mileage;
-		cin>>tmpC.manufacturer;
-		cin>>tmpC.price;
-		fprintf(fout, "%s\t%s\t%u\t%u\t%u\n", tmpC.carmodel, tmpC.productionyear, tmpC.mileage, tmpC.manufacturer, tmpC.price);
+		cin>>tmpC.carmodel>>tmpC.productionyear>>tmpC.mileage>>tmpC.manufacturer>>tmpC.price;
+		fprintf(fout, "%s\t%u\t%u\t%s\t%u\n", tmpC.carmodel, tmpC.productionyear, tmpC.mileage, tmpC.manufacturer, tmpC.price);
 	}
+	fclose(fout);
 }
 
 void ShowCars(char* filename, u_int N)
@@ -47,12 +44,13 @@ void ShowCars(char* filename, u_int N)
 	}
 	u_int k=0;
 	Car tmpC;
-	fprintf(fin, "Car Model\tProduction Year\tMileage\tManufacturer\tPrice\t\n");
- 	while(fscanf(fin,"%s\t%s\t%u\t%u\t%u\n", tmpC.carmodel, tmpC.productionyear, &tmpC.mileage, &tmpC.manufacturer, &tmpC.price) != EOF)
+	cout <<"Car Model\tProduction Year\tMileage\tManufacturer\tPrice\t\n";
+ 	while(fscanf(fin,"%s\t%u\t%u\t%s\t%u\n", tmpC.carmodel, &tmpC.productionyear, &tmpC.mileage, tmpC.manufacturer, &tmpC.price) != EOF)
 		if(!(N==k)){
-			k++;
-			fprintf(fin, "%s\t%s\t%u\t%u\t%u\n", tmpC.carmodel, tmpC.productionyear, tmpC.mileage, tmpC.manufacturer, tmpC.price);
+			fprintf(stdout,"%s\t%u\t%u\t%s\t%u\n", tmpC.carmodel, tmpC.productionyear, tmpC.mileage, tmpC.manufacturer, tmpC.price);
+			k++;	
 		}
+	fclose(fin);
 }
  
 int main(int argc, char** argv)
@@ -68,7 +66,7 @@ int main(int argc, char** argv)
 
 	u_int N = atoi(argv[2]);
 	
-	if ((!strcmp(argv[1],"-с")))
+	if ((!strcmp(argv[1],"-c")))
 		SetCars(argv[3], N);
 
 	if ((!strcmp(argv[1],"-r")))
