@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
+#include <cstdio>
 #define u_int unsigned int
  
 using namespace std;
@@ -14,31 +15,45 @@ struct Car
 	u_int price;
 };
  
-void SetCars(Car* tempCar, u_int N, ofstream& fout)
+void SetCars(u_int N, char* filename)
 {
-	fout <<"Car Model\t"<<"Production Year\t"<<"Mileage\t"<<"Manufacturer\t"<<"Price\t"<<endl;
+	FILE* fout;
+	fout = fopen(filename, "w");
+	if (fout == 0) {
+		cout << filename << ": can't be opened\n";
+		exit(-1);
+	}
+	Car tmpC;
+	cout <<"Car Model\t"<<"Production Year\t"<<"Mileage\t"<<"Manufacturer\t"<<"Price\t\n";
+	fprintf(fout, "Car Model\tProduction Year\tMileage\tManufacturer\tPrice\t\n");
 	for (int i = 0; i<N; i++)
 	{
-		fout<<tempCar[i].carmodel<<"\t";
-		fout<<tempCar[i].productionyear<<"\t";
-		fout<<tempCar[i].mileage<<"\t";
-		fout<<tempCar[i].manufacturer<<"\t";
-		fout<<tempCar[i].price<<"\t"<<end;
+		cin>>tmpC.carmodel;
+		cin>>tmpC.productionyear;
+		cin>>tmpC.mileage;
+		cin>>tmpC.manufacturer;
+		cin>>tmpC.price;
+		fprintf(fout, "%s\t%s\t%u\t%u\t%u\n", tmpC.carmodel, tmpC.productionyear, tmpC.mileage, tmpC.manufacturer, tmpC.price);
 	}
 }
 
-void ShowCars(const Car* tempCar, u_int N, ifstream& fin)
+void ShowCars(u_int N, char* filename)
 {
-	fin <<"Car Model\t"<<"Production Year\t"<<"Mileage\t"<<"Manufacturer\t"<<"Price\t"<<endl;
-	for (int i = 0; i<N; i++)
-	{
-
-		fin>>tempCar[i].carmodel>>"\t";
-		fin>>tempCar[i].productionyear>>"\t";
-		fin>>tempCar[i].mileage>>"\t";
-		fin>>tempCar[i].manufacturer>>"\t";
-		fin>>tempCar[i].price>>"\t";
+	FILE* fin;
+	fin = fopen(filename, "r");
+	if (fin == 0) {
+		cout << filename << ": can't be opened\n";
+		exit(-1);
 	}
+	int k=0;
+	Car tmpC;
+	cout <<"Car Model\t"<<"Production Year\t"<<"Mileage\t"<<"Manufacturer\t"<<"Price\t\n";
+	fprintf(fin, "Car Model\tProduction Year\tMileage\tManufacturer\tPrice\t\n");
+ 	while(fscanf(fin,"%s\t%s\t%u\t%u\t%u\n", tmpC.carmodel, tmpC.productionyear, &tmpC.mileage, &tmpC.manufacturer, &tmpC.price) != EOF)
+		if(!(N==k)){
+			k++;
+			fprintf(fin, "%s\t%s\t%u\t%u\t%u\n", tmpC.carmodel, tmpC.productionyear, tmpC.mileage, tmpC.manufacturer, tmpC.price);
+		}
 }
  
 int main(int argc, char** argv)
@@ -51,23 +66,14 @@ int main(int argc, char** argv)
 		cout<< "Final view of the program launch structure -с [N] [file_name] or -r [N] [file_name]"<<endl;
 		return 0;
 	}
-	
-	Car* tempCar = new Car;
-	u_int N = atoi(argv[2]);
 
-	if ((!strcmp(argv[1],"-с")))
-	{
-		ofstream fout(argv[3]);
-		SetCars(tempCar, N, fout);
+	u_int N = atoi(argv[2]);
 	
-	}
+	if ((!strcmp(argv[1],"-с")))
+		SetCars(N,argv[3]);
 
 	if ((!strcmp(argv[1],"-r")))
-	{
-		ifstream fin(argv[3]);
-		ShowCars(tempCar, N, fin);
+		ShowCars(N,argv[3]);
 
-	}
-	delete tempCar;
 	return 0;
 }
