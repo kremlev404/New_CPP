@@ -73,7 +73,7 @@ void ShowCars(char* filename, u_int N)
 	//обязательно не забываем закрыть файл
 	fclose(fin);
 }
- 
+
 int main(int argc, char** argv)
 {
 	//Выводим лого
