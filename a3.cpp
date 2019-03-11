@@ -52,25 +52,20 @@ public:
 		for (int i = 0; i < strlen(carmodel1); i++) 
 			carmodel[i] = carmodel1[i];
 		carmodel[strlen(carmodel1)] = '\0';
-		return;
 	}
 	void setManufacturer(char* manufacturer1) {
 		for (int i = 0; i < strlen(manufacturer1); i++) 
 			manufacturer[i] = manufacturer1[i];
 		manufacturer[strlen(manufacturer1)] = '\0';
-		return;
 	}
 	void setPrice(unsigned int price1) {
 		price = price1;
-		return;
 	}
 	void setMileage(unsigned int mileage1) {
 		mileage = mileage1;
-		return;
 	}
 	void setProductionyear(unsigned int productionyear1) {
 		productionyear = productionyear1;
-		return;
 	}
 // //прописываем методы get для получения данных об обьекте
 	char* getCarmodel() {
