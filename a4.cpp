@@ -1,6 +1,7 @@
 // Подключаем нужные библиотеки
 #include <iostream>
 #include <fstream>
+#include <cstring>
 // Подключаем нашу локальную билиотеку
 #include "mylab.h"
 #define u_int unsigned int
@@ -101,7 +102,7 @@ int main(int argc, char* argv[]){
 //Выводим лого
 	logo();
 //Прверяем нужна ли пользователю помощь
- 	if ((!strcmp(argv[1],"--help")) || (!strcmp(argv[1],"--h"))){
+ 	if ((!Cmp(argv[1],"--help")) || (!Cmp(argv[1],"--h"))){
 	help();
 		return 0;
  	}
@@ -117,7 +118,7 @@ int main(int argc, char* argv[]){
 	u_int mileage;
 	u_int price;
 //Создаем таблицу
-	if ((!strcmp(argv[1],"-c"))){
+	if ((!Cmp(argv[1],"-c"))){
 		u_int k = atoi(argv[2]);
 		ofstream fO(argv[3], ios::binary);
 		Car* arrCar = new Car[k];
@@ -140,7 +141,7 @@ int main(int argc, char* argv[]){
 		arrCar = 0;
 	}
 //Выводим таблицу
-	if ((!strcmp(argv[1],"-r"))){
+	if ((!Cmp(argv[1],"-r"))){
 		ifstream fI(argv[3], ios::binary);
 		Car* arrCar = new Car[atoi(argv[2])];
 		u_int k1 = 0;
