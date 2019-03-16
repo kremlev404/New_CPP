@@ -1,7 +1,6 @@
 // Подключаем нужные библиотеки
 #include <iostream>
 #include <fstream>
-#include <cstring>
 // Подключаем нашу локальную билиотеку
 #include "mylab.h"
 #define u_int unsigned int
