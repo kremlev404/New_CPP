@@ -15,7 +15,7 @@ using std::ofstream;
 void logo(){
     cout << "\033[37;1m\033[44m"<< "\n **********************************************************";
     cout << "\033[37;1m\033[47m"<< "\n * Nizhniy Novgorod Technical University                  *";
-    cout << "\033[37;1m\033[47m"<< "\n * Study work number 3. Task number 12.                   *";
+    cout << "\033[37;1m\033[47m"<< "\n * Study work number 5. Task number 12.                   *";
     cout << "\033[37;1m\033[47m"<< "\n * Performed student 18-IVT-2 Kremlev Anton               *";
     cout << "\033[37;1m\033[44m"<< "\n **********************************************************";
     cout << "\x1b[39;49m" << endl << endl;;
@@ -38,7 +38,7 @@ protected:
     bool manual_contlor;
 public:
 	void getInfo(){		
-		cout<<"You've choosen : "<<type_of_aircraft<<endl;
+	cout<<"You've choosen : "<<type_of_aircraft<<endl;
         std::cout << std::boolalpha;
         if (manual_contlor == true)
         	cout<<"This type of Aircraft support manual control\n";
