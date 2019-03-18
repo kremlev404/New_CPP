@@ -29,6 +29,7 @@ void help()
 //Базовый класс
 class Aircraft{
 protected:
+//Создадим два поля,1-стринг,2-булеан для проверки на ручное управление
     std::string type_of_aircraft;
     bool manual_contlor;
 public:
@@ -46,6 +47,7 @@ public:
 //Производный от базового 
 class Piloted_aircraft : public Aircraft {
 protected:
+//С помощью конструктора присвоим первоначальные значения
     Piloted_aircraft(){
         manual_contlor = true;
     }
@@ -53,6 +55,7 @@ protected:
 //Производный от базового 
 class Not_piloted_aircraft : public Aircraft{
 protected:
+//С помощью конструктора присвоим первоначальные значения
     Not_piloted_aircraft(){
         manual_contlor = false;
     }
@@ -60,6 +63,7 @@ protected:
 //Производный от производного(конечный класс для описания обьекта)
 class Plane : public Piloted_aircraft{
 public:
+//С помощью конструктора присвоим первоначальные значения
     Plane() : Piloted_aircraft(){
         type_of_aircraft ="Plane\t\t";
     }
@@ -67,6 +71,7 @@ public:
 //Производный от производного(конечный класс для описания обьекта)
 class Helicopter : public Piloted_aircraft{
 public:
+//С помощью конструктора присвоим первоначальные значения
     Helicopter() : Piloted_aircraft(){
         type_of_aircraft = "Helicopter\t";
     }
@@ -74,6 +79,7 @@ public:
 //Производный от производного(конечный класс для описания обьекта)
 class Meteozond : public Not_piloted_aircraft{
 public:
+//С помощью конструктора присвоим первоначальные значения
     Meteozond() : Not_piloted_aircraft(){
         type_of_aircraft = "Meteozond\t";
     }
@@ -81,6 +87,7 @@ public:
 //Производный от производного(конечный класс для описания обьекта)
 class Flying_robot : public Not_piloted_aircraft{
 public:
+//С помощью конструктора присвоим первоначальные значения
     Flying_robot() : Not_piloted_aircraft(){
         type_of_aircraft = "Flying_robot";
     }
@@ -97,11 +104,12 @@ int main(int argc, char* argv[]){
     //перенаправим поток вывода в файл 
 	freopen(argv[2], "w", stdout);
 	cout<<"Type Of Aircraft\t Manual Control"<<endl;
+	//Создадим обьекты
 	Plane tu;
 	Meteozond me;
 	Helicopter he;
 	Flying_robot fr;
-
+	//Проверим что хочет от нас пользователь 
 	if (!strcmp(argv[1],"-all")){
 		tu.getInfo();
 		me.getInfo();
