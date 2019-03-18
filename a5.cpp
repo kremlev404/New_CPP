@@ -8,7 +8,7 @@ using std::endl;
 void logo(){
     cout << "\033[37;1m\033[44m"<< "\n **********************************************************";
     cout << "\033[37;1m\033[47m"<< "\n * Nizhniy Novgorod Technical University                  *";
-    cout << "\033[37;1m\033[47m"<< "\n * Study work number 5. Task number 12.                   *";
+    cout << "\033[37;1m\033[47m"<< "\n * Study work number 5. Task number 2.                   *";
     cout << "\033[37;1m\033[47m"<< "\n * Performed student 18-IVT-2 Kremlev Anton               *";
     cout << "\033[37;1m\033[44m"<< "\n **********************************************************";
     cout << "\x1b[39;49m" << endl << endl;;
@@ -57,28 +57,28 @@ protected:
         manual_contlor = false;
     }
 };
-//Производный от производного(конечные классы для описания обьектов)
+//Производный от производного(конечный класс для описания обьекта)
 class Plane : public Piloted_aircraft{
 public:
     Plane() : Piloted_aircraft(){
         type_of_aircraft ="Plane\t\t";
     }
 };
-//Производный от производного(конечные классы для описания обьектов)
+//Производный от производного(конечный класс для описания обьекта)
 class Helicopter : public Piloted_aircraft{
 public:
     Helicopter() : Piloted_aircraft(){
         type_of_aircraft = "Helicopter\t";
     }
 };
-//Производный от производного(конечные классы для описания обьектов)
+//Производный от производного(конечный класс для описания обьекта)
 class Meteozond : public Not_piloted_aircraft{
 public:
     Meteozond() : Not_piloted_aircraft(){
         type_of_aircraft = "Meteozond\t";
     }
 };
-//Производный от производного(конечные классы для описания обьектов)
+//Производный от производного(конечный класс для описания обьекта)
 class Flying_robot : public Not_piloted_aircraft{
 public:
     Flying_robot() : Not_piloted_aircraft(){
