@@ -1,15 +1,9 @@
 // Подключаем нужные библиотеки
 #include <iostream>
-#include <fstream>
 #include <cstring>
-#include <cstdio>
-#define u_int unsigned int
 // Подключаем пространство имен
 using std::cout;
-using std::cin;
 using std::endl;
-using std::ifstream;
-using std::ofstream;
 
 // Наводим красоту
 void logo(){
@@ -89,7 +83,7 @@ int main(int argc, char* argv[]){
     //Выводим лого
     logo();
     //Проверка на помощь
-    if (!strcmp(argv[1],"-help")){
+    if (!strcmp(argv[1],"-help"))
     	help();
     //перенаправим поток вывода в файл 
 	freopen("1.txt", "w", stdout);
