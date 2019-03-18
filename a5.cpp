@@ -4,7 +4,6 @@
 // Подключаем пространство имен
 using std::cout;
 using std::endl;
-
 // Наводим красоту
 void logo(){
     cout << "\033[37;1m\033[44m"<< "\n **********************************************************";
@@ -19,59 +18,67 @@ void help()
 {
 	cout<< "You can choose 2 startup options: "<<endl;
 	cout<< "-all to see all the information about the objects "<<endl;
-	cout<< "-one [object] to see the information about the choosen object"<<endl;
+	cout<< "[object] to see the information about the choosen object"<<endl;
 	cout<< "Variants of objects:"<<endl;
 	cout<< "-Plane"<<endl;
 	cout<< "-Meteozond"<<endl;
 	cout<< "-Helicopter"<<endl;
 	cout<< "-Flying_robot"<<endl;
+	cout<< "//FINAL FORM// -all/none -[object] filename"<<endl;
 }
+//Базовый класс
 class Aircraft{
 protected:
     std::string type_of_aircraft;
     bool manual_contlor;
 public:
-	void getInfo(){		
-	cout<<"You've choosen : "<<type_of_aircraft<<endl;
-        std::cout << std::boolalpha;
+//Метод для вывода информации в файл
+	void getInfo(){				
+		cout<<"\t"<<type_of_aircraft<<"\t\t\t";
+		std::cout << std::boolalpha;
         if (manual_contlor == true)
-        	cout<<"This type of Aircraft support manual control\n";
-        else 
-        	cout<<"This type of Aircraft doesn't support manual control\n";
+			cout<<"YES\n";
+		else 
+			cout<<"NO\n";
 
     }
 };
+//Производный от базового 
 class Piloted_aircraft : public Aircraft {
 protected:
     Piloted_aircraft(){
         manual_contlor = true;
     }
 };
+//Производный от базового 
 class Not_piloted_aircraft : public Aircraft{
 protected:
     Not_piloted_aircraft(){
         manual_contlor = false;
     }
 };
-
+//Производный от производного(конечные классы для описания обьектов)
 class Plane : public Piloted_aircraft{
 public:
     Plane() : Piloted_aircraft(){
-        type_of_aircraft ="Plane";
+        type_of_aircraft ="Plane\t\t";
     }
 };
+//Производный от производного(конечные классы для описания обьектов)
 class Helicopter : public Piloted_aircraft{
 public:
     Helicopter() : Piloted_aircraft(){
-        type_of_aircraft = "Helicopter";
+        type_of_aircraft = "Helicopter\t";
     }
 };
+//Производный от производного(конечные классы для описания обьектов)
 class Meteozond : public Not_piloted_aircraft{
 public:
     Meteozond() : Not_piloted_aircraft(){
-        type_of_aircraft = "Meteozond";
+        type_of_aircraft = "Meteozond\t";
     }
 };
+//Производный от производного(конечные классы для описания обьектов)
 class Flying_robot : public Not_piloted_aircraft{
 public:
     Flying_robot() : Not_piloted_aircraft(){
@@ -82,32 +89,36 @@ public:
 int main(int argc, char* argv[]){
     //Выводим лого
     logo();
+
     //Проверка на помощь
     if (!strcmp(argv[1],"-help"))
     	help();
+
     //перенаправим поток вывода в файл 
-	freopen("1.txt", "w", stdout);
+	freopen(argv[2], "w", stdout);
+	cout<<"Type Of Aircraft\t Manual Control"<<endl;
 	Plane tu;
 	Meteozond me;
 	Helicopter he;
 	Flying_robot fr;
+
 	if (!strcmp(argv[1],"-all")){
 		tu.getInfo();
 		me.getInfo();
 		he.getInfo();
 		fr.getInfo();
 	}
-	else if(!strcmp(argv[1],"-one")){
-		if ((!strcmp(argv[2],"-Plane")))
+	else {
+		if ((!strcmp(argv[1],"-Plane")))
 	    	tu.getInfo();
 	      
-	    if(!strcmp(argv[2],"-Meteozond"))
+	    if(!strcmp(argv[1],"-Meteozond"))
 	    	me.getInfo();
 	    
-	    if(!strcmp(argv[2],"-Helicopter"))
+	    if(!strcmp(argv[1],"-Helicopter"))
 	    	he.getInfo();
 
-	    if(!strcmp(argv[2],"-Flying_robot"))
+	    if(!strcmp(argv[1],"-Flying_robot"))
 	    	fr.getInfo();
 	}  
  	fclose(stdout);
