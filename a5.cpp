@@ -6,42 +6,39 @@ using std::cout;
 using std::endl;
 // Наводим красоту
 void logo(){
-    cout << "\033[37;1m\033[44m"<< "\n **********************************************************";
-    cout << "\033[37;1m\033[47m"<< "\n * Nizhniy Novgorod Technical University                  *";
-    cout << "\033[37;1m\033[47m"<< "\n * Study work number 5. Task number 2.                   *";
-    cout << "\033[37;1m\033[47m"<< "\n * Performed student 18-IVT-2 Kremlev Anton               *";
-    cout << "\033[37;1m\033[44m"<< "\n **********************************************************";
-    cout << "\x1b[39;49m" << endl << endl;;
+	cout << "\033[37;1m\033[44m"<< " **********************************************************";
+	cout << "\x1b[39;49m" << endl;
+	cout << "\033[37;1m\033[47m"<< " * Nizhniy Novgorod Technical University                  *";
+	cout << "\x1b[39;49m" << endl;
+	cout << "\033[37;1m\033[47m"<< " * Study work number 5. Task number 12.                   *";
+	cout << "\x1b[39;49m" << endl;
+	cout << "\033[37;1m\033[47m"<< " * Performed student 18-IVT-2 Kremlev Anton               *";
+	cout << "\x1b[39;49m" << endl;
+	cout << "\033[37;1m\033[44m"<< " **********************************************************";
+	cout << "\x1b[39;49m" << endl << endl;;
 }
 //Создаем функцию с подсказками пользователю
 void help()
 {
-	cout<< "You can choose 2 startup options: "<<endl;
-	cout<< "-all to see all the information about the objects "<<endl;
-	cout<< "[object] to see the information about the choosen object"<<endl;
-	cout<< "Variants of objects:"<<endl;
-	cout<< "-Plane"<<endl;
-	cout<< "-Meteozond"<<endl;
-	cout<< "-Helicopter"<<endl;
-	cout<< "-Flying_robot"<<endl;
-	cout<< "//FINAL FORM// -all/none -[object] filename"<<endl;
+	cout<< "You have to use this form"<<endl;
+	cout<< "//FINAL FORM// -all filename"<<endl;
 }
 //Базовый класс
 class Aircraft{
 protected:
 //Создадим два поля,1-стринг,2-булеан для проверки на ручное управление
-    std::string type_of_aircraft;
     bool manual_contlor;
 public:
 //Метод для вывода информации в файл
 	void getInfo(){				
-		cout<<"\t"<<type_of_aircraft<<"\t\t\t";
 		std::cout << std::boolalpha;
         if (manual_contlor == true)
 			cout<<"YES\n";
 		else 
 			cout<<"NO\n";
-
+    }
+    virtual void TypeOfAircraft(){
+    	cout<<"i am ur parent\n";
     }
 };
 //Производный от базового 
@@ -64,46 +61,61 @@ protected:
 class Plane : public Piloted_aircraft{
 public:
 //С помощью конструктора присвоим первоначальные значения
-    Plane() : Piloted_aircraft(){
-        type_of_aircraft ="Plane\t\t";
-    }
+    
+        void TypeOfAircraft() override{
+        	cout<<"Plane\t\t";
+        }
+    
 };
 //Производный от производного(конечный класс для описания обьекта)
 class Helicopter : public Piloted_aircraft{
 public:
 //С помощью конструктора присвоим первоначальные значения
-    Helicopter() : Piloted_aircraft(){
-        type_of_aircraft = "Helicopter\t";
-    }
+    
+    	 void TypeOfAircraft() override{
+        	cout<<"Helicopter\t";
+        }
+    
 };
 //Производный от производного(конечный класс для описания обьекта)
 class Meteozond : public Not_piloted_aircraft{
 public:
 //С помощью конструктора присвоим первоначальные значения
-    Meteozond() : Not_piloted_aircraft(){
-        type_of_aircraft = "Meteozond\t";
-    }
+   
+    	 void TypeOfAircraft() override{
+        	cout<<"Meteozond\t";
+       }
+    
 };
 //Производный от производного(конечный класс для описания обьекта)
 class Flying_robot : public Not_piloted_aircraft{
 public:
 //С помощью конструктора присвоим первоначальные значения
-    Flying_robot() : Not_piloted_aircraft(){
-        type_of_aircraft = "Flying_robot";
-    }
+   
+    	 void TypeOfAircraft() override{
+        	cout<<"Flying_robot\t";
+    	}
 };
 
 int main(int argc, char* argv[]){
+	try{
+		if (argc!=3)
+			throw "INCORRECT number of argc";
+	}
+	catch(const char* msg){
+		cout<<msg<<endl;
+		exit(-1);
+	}
     //Выводим лого
     logo();
-
+ 	
     //Проверка на помощь
     if (!strcmp(argv[1],"-help"))
     	help();
-
+ 
     //перенаправим поток вывода в файл 
 	freopen(argv[2], "w", stdout);
-	cout<<"Type Of Aircraft\t Manual Control"<<endl;
+	cout<<"TypeOf Aircraft\t Manual Control"<<endl;
 	//Создадим обьекты
 	Plane tu;
 	Meteozond me;
@@ -111,23 +123,28 @@ int main(int argc, char* argv[]){
 	Flying_robot fr;
 	//Проверим что хочет от нас пользователь 
 	if (!strcmp(argv[1],"-all")){
+		tu.TypeOfAircraft();
 		tu.getInfo();
+		me.TypeOfAircraft();
 		me.getInfo();
+		he.TypeOfAircraft();
 		he.getInfo();
-		fr.getInfo();
+		fr.TypeOfAircraft();
+		fr.getInfo();	
 	}
 	else {
 		if ((!strcmp(argv[1],"-Plane")))
-	    	tu.getInfo();
-	      
+	    	tu.TypeOfAircraft();
+	    	tu.getInfo();	    		      
 	    if(!strcmp(argv[1],"-Meteozond"))
-	    	me.getInfo();
-	    
+	    	me.TypeOfAircraft();
+	    	me.getInfo();	    	
 	    if(!strcmp(argv[1],"-Helicopter"))
-	    	he.getInfo();
-
+	    	he.TypeOfAircraft();
+	    	he.getInfo();	    	
 	    if(!strcmp(argv[1],"-Flying_robot"))
-	    	fr.getInfo();
+	    	fr.TypeOfAircraft();
+	    	fr.getInfo();	    	
 	}  
  	fclose(stdout);
     return 0;
